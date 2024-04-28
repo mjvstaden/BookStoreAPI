@@ -13,16 +13,16 @@ export const addBook = (title: string, author: string, genre: string, price: num
     BookModel.create({ title, author, genre, price });
 }
 
-export const getAllBooks = () => {
-    BookModel.find({});
+export const getBooks = () => {
+    return BookModel.find({});
 }
 
 export const getBookById = (id: string) => {
-    BookModel.findById(id);
+    return BookModel.findById(id);
 }
 
 export const getBookbyTitle = (title: string) => {
-    BookModel.findOne({ title });
+    return BookModel.findOne({ title });
 }
 
 export const getBooksByAuthor = (author: string) => {
@@ -30,7 +30,7 @@ export const getBooksByAuthor = (author: string) => {
 }
 
 export const getBooksByGenre = (genre: string) => {
-    BookModel.find({ genre });
+    return BookModel.find({ genre });
 }
 
 export const getBooksByMaxPrice = (price: number) => {
@@ -41,8 +41,8 @@ export const updateBookByTitle = (title: string, author: string, genre: string, 
     BookModel.updateOne({ title }, { author, genre, price });
 }
 
-export const updateBookById = (id: string, author: string, genre: string, price: number) => {
-    BookModel.findByIdAndUpdate(id, { author, genre, price });
+export const updateBookById = (id: string, title: string, author: string, genre: string, price: number) => {
+    return BookModel.findByIdAndUpdate(id, { title, author, genre, price });
 }
 
 export const deleteBookById = (id: string) => {
