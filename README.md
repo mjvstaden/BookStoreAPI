@@ -11,5 +11,7 @@ npm start
 
 ### Things I still need to do: 
 Delete doesn't work yet
+
 No unit tests yet 
+
 Input validation and error handeling 
