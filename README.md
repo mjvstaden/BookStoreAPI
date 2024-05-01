@@ -1,5 +1,5 @@
 # BookStoreAPI
-This is a RESTful API for a bookstore that is built with the Express (Typescript) Framework 
+This is a RESTful API for a bookstore that is built with the Express (Typescript) Framework and MongoDB
 
 ## Installation
 Use npm to install dependencies:
