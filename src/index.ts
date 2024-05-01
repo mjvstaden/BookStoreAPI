@@ -3,8 +3,11 @@ import http from 'http';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import router from './router';
+import bodyParser from 'body-parser';
 
 const app = express();
+
+app.use(bodyParser.json());
 
 app.use(cors({
     credentials: true, 

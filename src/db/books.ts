@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+const mongo = require('mongodb')
 
 const BookSchema = new mongoose.Schema({
     title: {type: String, required: true},
@@ -26,7 +27,7 @@ export const getBookbyTitle = (title: string) => {
 }
 
 export const getBooksByAuthor = (author: string) => {
-    BookModel.find({ author });
+    return BookModel.find({ author });
 }
 
 export const getBooksByGenre = (genre: string) => {
@@ -45,8 +46,8 @@ export const updateBookById = (id: string, title: string, author: string, genre:
     return BookModel.findByIdAndUpdate(id, { title, author, genre, price });
 }
 
-export const deleteBookById = (id: string) => {
-    BookModel.findByIdAndDelete(id);
+export const deleteBookById = async (id: string) => {
+    await BookModel.deleteOne({ _id: new mongo.ObjectId(id) });
 }
 
 export const deleteBookByTitle = (title: string) => {

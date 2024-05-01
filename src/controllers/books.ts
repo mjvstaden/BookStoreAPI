@@ -1,9 +1,19 @@
 import express from 'express';
-import { addBook, getBookById, updateBookById, deleteBookById, getBooks, getBooksByGenre } from '../db/books'; 
+import { addBook, getBookById, updateBookById, deleteBookById, getBooks, getBooksByGenre, getBooksByAuthor, getBookbyTitle } from '../db/books'; 
 
 export const getAllBooks = async (req: express.Request, res: express.Response) => {
     try {
-        const books = await getBooks();
+        const { genre, author, title } = req.query;
+        let books;
+        if (genre) {
+            books = await getBooksByGenre(genre as string);
+        } else if (author) {
+            books = await getBooksByAuthor(author as string);
+        } else if (title) {
+            books = await getBookbyTitle(title as string);
+        } else {
+            books = await getBooks();
+        }
         res.status(200).send(books);
     } catch (error) {
         console.error(error);
@@ -17,6 +27,7 @@ export const addNewBook = async (req: express.Request, res: express.Response) =>
         addBook(title, author, genre, price);
         res.status(201).send('Book added successfully');
     } catch (error) {
+        console.log(error);
         res.status(500).send(error);
     }
 }
@@ -55,4 +66,15 @@ export const getDiscountedPrice = async (req: express.Request, res: express.Resp
         console.log(error);
         res.status(500).send(error);
     }
+}
+
+export const deleteBook = async (req: express.Request, res: express.Response) => {
+    const { id } = req.params;
+    deleteBookById(id).then(() => {
+        res.status(200).send('Book deleted successfully');
+    }
+    ).catch((error) => {
+        console.log(error);
+        res.status(500).send
+    })
 }
